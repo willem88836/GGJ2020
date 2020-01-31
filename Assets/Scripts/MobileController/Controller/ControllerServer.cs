@@ -74,6 +74,7 @@ public class ControllerServer : MonoBehaviour
 				{
 					// Translate data bytes to a ASCII string.
 					string json = System.Text.Encoding.ASCII.GetString(data, 0, i);
+					Debug.Log("received: " + json);
 					MobileInput mobileInput = JsonUtility.FromJson<MobileInput>(json);
 					mobileInputQueue.Enqueue(mobileInput);
 				}
