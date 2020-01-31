@@ -5,6 +5,7 @@ using Platformer.Gameplay;
 using static Platformer.Core.Simulation;
 using Platformer.Model;
 using Platformer.Core;
+using Framework.ScriptableObjects.Variables;
 
 namespace Platformer.Mechanics
 {
@@ -12,7 +13,7 @@ namespace Platformer.Mechanics
     /// This is the main class used to implement control of the player.
     /// It is a superset of the AnimationController class, but is inlined to allow for any kind of customisation.
     /// </summary>
-    public class PlayerController : KinematicObject
+    public class PlayerController : KinematicObject, IControllable
     {
         public AudioClip jumpAudio;
         public AudioClip respawnAudio;
@@ -42,6 +43,9 @@ namespace Platformer.Mechanics
 
         public Bounds Bounds => collider2d.bounds;
 
+		public SharedBool ConnectionActive;
+
+
         void Awake()
         {
             health = GetComponent<Health>();
@@ -51,9 +55,28 @@ namespace Platformer.Mechanics
             animator = GetComponent<Animator>();
         }
 
-        protected override void Update()
+		public void OnInputAcquired(MobileInput mobileInput)
+		{
+			if (mobileInput.InputType == InputTypes.Movement)
+			{
+				move.x = mobileInput.Value.x;
+			}
+			else if (mobileInput.InputType == InputTypes.Jump)
+			{
+				// The exact same thing as in the update function, but using mobileInput.
+				if (jumpState == JumpState.Grounded && mobileInput.Value.y < 0)
+					jumpState = JumpState.PrepareToJump;
+				else if (mobileInput.Value.y == 0)
+				{
+					stopJump = true;
+					Schedule<PlayerStopJump>().player = this;
+				}
+			}
+		}
+
+		protected override void Update()
         {
-            if (controlEnabled)
+            if (controlEnabled && !ConnectionActive.Value)
             {
                 move.x = Input.GetAxis("Horizontal");
                 if (jumpState == JumpState.Grounded && Input.GetButtonDown("Jump"))
@@ -129,7 +152,7 @@ namespace Platformer.Mechanics
             targetVelocity = move * maxSpeed;
         }
 
-        public enum JumpState
+		public enum JumpState
         {
             Grounded,
             PrepareToJump,

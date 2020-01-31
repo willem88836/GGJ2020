@@ -17,7 +17,7 @@ public class ControllerServer : MonoBehaviour
 	private TcpListener server;
 	private TcpClient client;
 
-	private bool isConnected;
+	[SerializeField] private SharedBool isConnected;
 	private bool isRunning;
 
 	ConcurrentQueue<MobileInput> mobileInputQueue = new ConcurrentQueue<MobileInput>();
@@ -57,7 +57,7 @@ public class ControllerServer : MonoBehaviour
 			Debug.LogFormat("Connected to client ({0})", client.ToString());
 
 			byte[] data = new byte[NetConfiguration.TCPBUFFERSIZE];
-			isConnected = true;
+			isConnected.Value = true;
 
 
 			while (isConnected)
@@ -89,7 +89,7 @@ public class ControllerServer : MonoBehaviour
 
 	public void TerminateConnection()
 	{
-		isConnected = false;
+		isConnected.Value = false;
 	}
 
 	public void TerminateServer()

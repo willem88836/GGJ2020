@@ -11,3 +11,10 @@ public struct MobileInput
 		this.Value = value;
 	}
 }
+
+public static class InputTypes
+{
+	public static string Movement = "MOVEMENTINPUT";
+	public static string Jump = "JUMP";
+}
+
