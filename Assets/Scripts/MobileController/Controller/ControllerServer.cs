@@ -103,6 +103,8 @@ public class ControllerServer : MonoBehaviour
 			if (!mobileInputQueue.TryDequeue(out mobileInput))
 				break;
 
+			Debug.Log(" asdfasdf");
+
 			foreach (IControllable controllable in controllables)
 			{
 				controllable.OnInputAcquired(mobileInput);

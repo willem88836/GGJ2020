@@ -16,7 +16,6 @@ public class MobileController : MonoBehaviour
 
 	private void Start()
 	{
-		return;
 		RunClient();
 	}
 
@@ -25,18 +24,6 @@ public class MobileController : MonoBehaviour
 	{
 		client = new TcpClient(serverIP.Value, NetConfiguration.PORT);
 		Debug.Log(client);
-	}
-
-	private void Update()
-	{
-		if (Input.GetKeyDown(KeyCode.Space))
-		{
-			RunClient();
-		}
-		else if (Input.GetKeyDown(KeyCode.S))
-		{
-			SendMobileInput(new MobileInput("moveX", 9));
-		}
 	}
 
 	public void SendMobileInput(MobileInput mobileInput)
@@ -48,5 +35,12 @@ public class MobileController : MonoBehaviour
 		stream.Write(data, 0, data.Length);
 
 		Debug.LogFormat("Sent message ({0}) to server", json);
+	}
+
+
+	public void SendProxyInput()
+	{
+		MobileInput input = new MobileInput("valeyteyp", 98f);
+		SendMobileInput(input);
 	}
 }
