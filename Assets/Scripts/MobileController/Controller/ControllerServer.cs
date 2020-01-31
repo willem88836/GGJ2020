@@ -3,12 +3,13 @@ using UnityEngine;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
-using JsonUtility = Framework.Features.Json.JsonUtility;
+using Framework.ScriptableObjects.Variables;
 
 
 public class ControllerServer : MonoBehaviour
 {
-	[SerializeField] private IControllable[] controllables;
+	[SerializeField] private SharedString ServerIP;
+	[SerializeField] private IControllable[] controllables = new IControllable[0];
 
 	private Thread listeningThread;
 
@@ -34,7 +35,7 @@ public class ControllerServer : MonoBehaviour
 		Debug.Log("Starting TCP Listening Thread...");
 
 		// TODO: test this IP
-		server = new TcpListener(IPAddress.Parse("127.0.0.1"), NetConfiguration.PORT);
+		server = new TcpListener(IPAddress.Parse(ServerIP.Value), NetConfiguration.PORT);
 		server.Start();
 		isRunning = true;
 
@@ -53,11 +54,10 @@ public class ControllerServer : MonoBehaviour
 			while (isConnected)
 			{
 				Debug.Log("Waiting for message...");
-				data = null;
 
 				NetworkStream stream = client.GetStream();
-
-
+				Debug.Log(stream.ToString());
+				
 				int i;
 
 				// Loop to receive all the data sent by the client.
@@ -85,9 +85,15 @@ public class ControllerServer : MonoBehaviour
 	public void TerminateServer()
 	{
 		TerminateConnection();
+		server.Stop();
 		isRunning = false;
 	}
 
+
+	private void OnDestroy()
+	{
+		TerminateServer();
+	}
 
 	private void Update()
 	{
