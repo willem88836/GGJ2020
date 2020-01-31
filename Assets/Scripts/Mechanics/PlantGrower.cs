@@ -12,6 +12,8 @@ public class PlantGrower : MonoBehaviour
 	Vector2 _currentPosition;
 	Vector2 _dragPosition;
 
+	[SerializeField] PlantPower _plantPower;
+
 	void Start()
 	{
 		_currentPosition = transform.position;
@@ -20,6 +22,9 @@ public class PlantGrower : MonoBehaviour
 
 	void OnMouseDrag()
 	{
+		if (_plantPower.Powerbar.value <= 0)
+			return;
+
 		_dragPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
 		if (Vector2.Distance(_currentPosition, _dragPosition) >= _snappingDistance)
@@ -33,6 +38,8 @@ public class PlantGrower : MonoBehaviour
 			transform.position = NewPosition();
 			AddCollider(NewPosition(), _currentPosition);
 			_currentPosition = transform.position;
+
+			_plantPower.Powerbar.value--;
 		}
 	}
 
