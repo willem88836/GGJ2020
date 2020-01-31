@@ -1,26 +1,32 @@
 ﻿using UnityEngine;
 using Framework.ScriptableObjects.Variables;
 using System.Net.Sockets;
-
+using UnityEngine.Events;
+using System;
 
 public class MobileController : MonoBehaviour
 {
 	[SerializeField] private SharedString serverIP;
+	[SerializeField] private UnityEvent onConnectEvent;
+	[SerializeField] private UnityEvent onConnectFailEvent;
 
 	private TcpListener server;
 	private TcpClient client;
 
 
-	private void Start()
+	public void RunClient()
 	{
-		RunClient();
-	}
-
-
-	private void RunClient()
-	{
-		client = new TcpClient(serverIP.Value, NetConfiguration.PORT);
-		Debug.Log(client);
+		try
+		{
+			client = new TcpClient(serverIP.Value, NetConfiguration.PORT);
+			Debug.Log(client);
+			onConnectEvent.Invoke();
+		}
+		catch (Exception e)
+		{
+			Debug.LogError(e.Message);
+			onConnectFailEvent.Invoke();
+		}
 	}
 
 	public void SendMobileInput(MobileInput mobileInput)
