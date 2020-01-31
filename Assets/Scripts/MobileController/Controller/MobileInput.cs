@@ -1,9 +1,11 @@
-﻿public struct MobileInput
+﻿using UnityEngine;
+
+public struct MobileInput
 {
 	public string InputType;
-	public float Value;
+	public Vector3 Value;
 
-	public MobileInput(string inputType, float value)
+	public MobileInput(string inputType, Vector3 value)
 	{
 		this.InputType = inputType;
 		this.Value = value;

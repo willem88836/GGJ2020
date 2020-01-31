@@ -1,8 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Framework.ScriptableObjects.Variables;
-using System.Net;
 using System.Net.Sockets;
 
 
@@ -40,7 +37,7 @@ public class MobileController : MonoBehaviour
 
 	public void SendProxyInput()
 	{
-		MobileInput input = new MobileInput("valeyteyp", 98f);
+		MobileInput input = new MobileInput("vector3tests", Vector3.one);
 		SendMobileInput(input);
 	}
 }
