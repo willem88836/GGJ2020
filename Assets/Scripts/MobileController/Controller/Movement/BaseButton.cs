@@ -20,41 +20,16 @@ public abstract class BaseButton : MonoBehaviour
 
 	protected void Update()
 	{
-		//if (Input.GetMouseButton(0))
-		//{
-		//	Vector3 delta = Input.mousePosition - centre.position;
-		//	float distance = Mathf.Abs(delta.magnitude);
-
-		//	if (distance <= MaxDistance)
-		//	{
-		//		HandleInput(delta, distance);
-		//		return;
-		//	}
-
-		//	HandleFailedInput();
-		//}
-		//else
-		//{
-		//	Vector3 delta = Input.mousePosition - centre.position;
-		//	float distance = Mathf.Abs(delta.magnitude);
-
-		//	if (distance <= MaxDistance)
-		//	{
-		//		HandleFailedInput();
-		//	}
-		//}
-
-
 		for(int i = 0; i < Input.touches.Length; i++)
 		{
 			Touch touch = Input.touches[i];
 			if (touch.phase == TouchPhase.Began)
 			{
-				float d = Mathf.Abs(((Vector3)touch.position - centre.position).magnitude);
-				if (d < MaxDistance)
+				if (InRange((Vector3)touch.position))
 				{
 					myTouchIndex = i;
 				}
+
 			}
 			else if (touch.phase == TouchPhase.Ended && i == myTouchIndex)
 			{
@@ -73,6 +48,14 @@ public abstract class BaseButton : MonoBehaviour
 			HandleInput(delta, distance);
 		}
 	}
+
+
+	protected virtual bool InRange(Vector3 position)
+	{
+		float d = Mathf.Abs((position - centre.position).magnitude);
+		return d < MaxDistance;
+	}
+
 
 	protected abstract void HandleInput(Vector3 delta, float distance);
 	protected abstract void HandleFailedInput();

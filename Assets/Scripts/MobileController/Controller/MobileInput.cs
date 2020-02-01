@@ -16,5 +16,6 @@ public static class InputTypes
 {
 	public static string Movement = "MOVEMENTINPUT";
 	public static string Jump = "JUMP";
+	public static string PlantDraw = "PLANTDRAW";
 }
 
