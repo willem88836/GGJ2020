@@ -21,7 +21,7 @@ public class Typewriter : MonoBehaviour
 		{
 			_text.text += c;
 
-			yield return new WaitForSeconds(_writeSpeed);
+			yield return new WaitForSeconds(1 / _writeSpeed);
 		}
 	}
 }
