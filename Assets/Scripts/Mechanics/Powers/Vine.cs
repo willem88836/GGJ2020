@@ -3,8 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(BoxCollider2D))]
-public class Vine : MonoBehaviour
+public class Vine : Interactable
 {
 	[SerializeField] float _maxLength;
 
@@ -14,13 +13,12 @@ public class Vine : MonoBehaviour
 
 	public Action<float> OnPowerUsage;
 
-	BoxCollider2D _collider;
+	[SerializeField] BoxCollider2D _collider;
 
 	Vector2 _startPosition;
 
 	void Start()
 	{
-		_collider = GetComponent<BoxCollider2D>();
 		_startPosition = transform.position;	
 	}
 
@@ -29,8 +27,8 @@ public class Vine : MonoBehaviour
 		if (OnPowerUsage == null)
 			return;
 
-		if (Input.GetKey(KeyCode.Alpha3))
-			Grow();
+		//if (Input.GetKey(KeyCode.Alpha3))
+		//	Grow();
 	}
 
 	void Grow()
@@ -54,5 +52,20 @@ public class Vine : MonoBehaviour
 		Vector2 size = _collider.size;
 		size.y += _growSpeed * Time.deltaTime * 2;
 		_collider.size = size;
+	}
+
+	public override void Dehighlight()
+	{
+		Debug.LogWarning("Dehighlighting vine");
+	}
+
+	public override void Highlight()
+	{
+		Debug.LogWarning("Highlighting vine");
+	}
+
+	public override void Interact(MobileInput input)
+	{
+		Grow();
 	}
 }

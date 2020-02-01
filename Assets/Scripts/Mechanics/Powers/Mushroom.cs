@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Mushroom : MonoBehaviour
+public class Mushroom : Interactable
 {
 	Vector2 _startSize;
 	[SerializeField] Vector2 _newSize;
@@ -25,8 +25,8 @@ public class Mushroom : MonoBehaviour
 		if (OnPowerUsage == null)
 			return;
 
-		if (Input.GetKey(KeyCode.Alpha2))
-			Grow();
+		//if (Input.GetKey(KeyCode.Alpha2))
+		//	Grow();
     }
 
 	void Grow()
@@ -38,5 +38,21 @@ public class Mushroom : MonoBehaviour
 		transform.localScale = Vector2.Lerp(_startSize, _newSize, T);
 
 		OnPowerUsage.Invoke(_powerUsage * Time.deltaTime);
+	}
+
+
+	public override void Dehighlight()
+	{
+		Debug.LogWarning("Dehighlighting shroom");
+	}
+
+	public override void Highlight()
+	{
+		Debug.LogWarning("Highlighting shroom");
+	}
+
+	public override void Interact(MobileInput input)
+	{
+		Grow();
 	}
 }

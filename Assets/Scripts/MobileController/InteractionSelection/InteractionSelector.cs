@@ -18,7 +18,11 @@ public class InteractionSelector : MonoBehaviour, IControllable
 
 			LookingUp = lookDir.y >= 0;
 			SetClosest();
-			 //OnInputAcquired(new MobileInput(InputTypes.PlantInteract, lookDir));
+		}
+
+		if (Input.GetKey(KeyCode.Alpha2))
+		{
+			currentClosest.Interact(new MobileInput(InputTypes.PlantInteract, Vector3.zero));
 		}
 	}
 
