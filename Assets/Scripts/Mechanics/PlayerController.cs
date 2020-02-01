@@ -236,6 +236,7 @@ namespace Platformer.Mechanics
 				return;
 
 			move.y = InputVerticalAxis;
+            GetComponent<Animator>().Play("Player-Climb");
 
 			transform.Translate(move * Time.deltaTime);
 
