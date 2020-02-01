@@ -5,6 +5,7 @@ using Platformer.Gameplay;
 using static Platformer.Core.Simulation;
 using Platformer.Model;
 using Platformer.Core;
+using Framework.ScriptableObjects.Variables;
 
 namespace Platformer.Mechanics
 {
@@ -12,7 +13,7 @@ namespace Platformer.Mechanics
     /// This is the main class used to implement control of the player.
     /// It is a superset of the AnimationController class, but is inlined to allow for any kind of customisation.
     /// </summary>
-    public class PlayerController : KinematicObject
+    public class PlayerController : KinematicObject, IControllable
     {
         public AudioClip jumpAudio;
         public AudioClip respawnAudio;
@@ -42,6 +43,9 @@ namespace Platformer.Mechanics
 
         public Bounds Bounds => collider2d.bounds;
 
+		public SharedBool ConnectionActive;
+
+
         void Awake()
         {
             health = GetComponent<Health>();
@@ -51,14 +55,52 @@ namespace Platformer.Mechanics
             animator = GetComponent<Animator>();
         }
 
-        protected override void Update()
+		public void OnInputAcquired(MobileInput inp)
+		{
+			if (inp.InputType == InputTypes.Movement)
+			{
+				InputHorizontalAxis = inp.Value.x;
+			}
+			if (inp.InputType == InputTypes.Jump)
+			{
+				if (inp.Value.y > 0)
+				{
+					if (InputJump && !InputJumpDown)
+					{
+						InputJumpUp = true;
+						InputJumpDown = false;
+					}
+					InputJump = false;
+				}
+				else if (inp.Value.y < 0)
+				{
+					if (!InputJump)
+					{
+						InputJumpDown = true;
+						InputJumpUp = false;
+					}
+					InputJump = true;
+				}
+			}
+		}
+
+		protected override void Update()
         {
+			if (!ConnectionActive.Value)
+			{
+				InputHorizontalAxis = Input.GetAxis("Horizontal");
+				InputJumpDown = Input.GetButtonDown("Jump");
+				InputJumpUp = Input.GetButtonUp("Jump");
+			}
+
             if (controlEnabled)
             {
-                move.x = Input.GetAxis("Horizontal");
-                if (jumpState == JumpState.Grounded && Input.GetButtonDown("Jump"))
+
+				move.x = InputHorizontalAxis;
+
+                if (jumpState == JumpState.Grounded && InputJumpDown)
                     jumpState = JumpState.PrepareToJump;
-                else if (Input.GetButtonUp("Jump"))
+                else if (InputJumpUp)
                 {
                     stopJump = true;
                     Schedule<PlayerStopJump>().player = this;
@@ -68,9 +110,24 @@ namespace Platformer.Mechanics
             {
                 move.x = 0;
             }
+
             UpdateJumpState();
             base.Update();
+
+			if (ConnectionActive.Value)
+			{
+				InputJumpDown = false;
+				InputJumpUp = false;
+			}
         }
+
+
+		private float InputHorizontalAxis;
+		private bool InputJumpDown;
+		private bool InputJumpUp;
+		private bool InputJump;
+
+
 
         void UpdateJumpState()
         {
@@ -129,7 +186,7 @@ namespace Platformer.Mechanics
             targetVelocity = move * maxSpeed;
         }
 
-        public enum JumpState
+		public enum JumpState
         {
             Grounded,
             PrepareToJump,

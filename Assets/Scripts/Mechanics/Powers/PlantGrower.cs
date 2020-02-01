@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlantGrower : MonoBehaviour
+public class PlantGrower : MonoBehaviour, IControllable
 {
 	[SerializeField] float _snappingDistance = 2;
 	[SerializeField] GameObject _treeCollider;
@@ -11,9 +11,13 @@ public class PlantGrower : MonoBehaviour
 	BoxCollider2D _boxCollider;
 
 	Vector2 _currentPosition;
-	Vector2 _dragPosition;
+	Vector2 _drawerCurrent;
+	int insertIndex = 0;
 
 	public Action<float> OnPowerUsage;
+
+
+
 
 	void Start()
 	{
@@ -21,30 +25,54 @@ public class PlantGrower : MonoBehaviour
 		_boxCollider = GetComponent<BoxCollider2D>();
 	}
 
+	public void OnInputAcquired(MobileInput mobileInput)
+	{
+		if (mobileInput.InputType == InputTypes.PlantDraw)
+		{
+			ProcessPosition(mobileInput.Value);
+		}
+	}
+
 	void OnMouseDrag()
+	{
+		ProcessPosition(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+	}
+
+	private void ProcessPosition(Vector2 dragPosition)
 	{
 		if (OnPowerUsage == null)
 			return;
 
-		_dragPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-		if (Vector2.Distance(_currentPosition, _dragPosition) >= _snappingDistance)
+		if (insertIndex == -1)
 		{
-			RaycastHit2D[] hit = Physics2D.LinecastAll(_currentPosition, _dragPosition);
+			_drawerCurrent = dragPosition;
+			insertIndex = 0;
+		}
+
+
+		// mozart, "Write It", Muse, Doom, The Swanlake 
+		if (Vector2.Distance(_drawerCurrent, dragPosition) >= _snappingDistance)
+		{
+			Vector2 worldDragPosition = _currentPosition + dragPosition - _drawerCurrent;
+
+			RaycastHit2D[] hit = Physics2D.LinecastAll(_currentPosition, worldDragPosition);
 			if (hit.Length > 1)
 				return;
 
-			transform.position = NewPosition();
-			AddCollider(NewPosition(), _currentPosition);
+			transform.position = NewPosition(worldDragPosition);
+			AddCollider(NewPosition(worldDragPosition), _currentPosition);
 			_currentPosition = transform.position;
+			_drawerCurrent = dragPosition;
 
 			OnPowerUsage.Invoke(1);
+
+			insertIndex++;
 		}
 	}
 
-	Vector2 NewPosition()
+	Vector2 NewPosition(Vector2 dragPosition)
 	{
-		Vector2 position = Vector2.MoveTowards(_currentPosition, _dragPosition, _snappingDistance);
+		Vector2 position = Vector2.MoveTowards(_currentPosition, dragPosition, _snappingDistance);
 		return position;
 	}
 
