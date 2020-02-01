@@ -19,8 +19,8 @@ public class ThumbStick : BaseButton
 
 	protected override void HandleInput(Vector3 delta, float distance)
 	{
-		delta = delta.normalized * (distance / MaxDistance);
-		clickableThumbStick.position = centre.position + delta * distance;
+		delta = delta.normalized * (Mathf.Min(distance, MaxDistance) / MaxDistance);
+		clickableThumbStick.position = centre.position + delta.normalized * Mathf.Min(distance, MaxDistance) / 2f;
 		previouslyZero = false;
 		controller.SendMobileInput(new MobileInput(MobileInputType, delta));
 	}
