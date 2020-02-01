@@ -9,7 +9,18 @@ public class InteractionSelector : MonoBehaviour, IControllable
 	private bool LookingUp = true;
 
 
+	void Update()
+	{
+		Vector3 lookDir = Vector3.up * Input.GetAxis("Vertical");
 
+		if (lookDir.y != 0)
+		{
+
+			LookingUp = lookDir.y >= 0;
+			SetClosest();
+			 //OnInputAcquired(new MobileInput(InputTypes.PlantInteract, lookDir));
+		}
+	}
 
 
 	public void OnInputAcquired(MobileInput mobileInput)
@@ -17,6 +28,7 @@ public class InteractionSelector : MonoBehaviour, IControllable
 		if (mobileInput.InputType == InputTypes.Movement)
 		{
 			LookingUp = mobileInput.Value.y >= 0;
+			SetClosest();
 			return;
 		}
 
@@ -102,7 +114,9 @@ public class InteractionSelector : MonoBehaviour, IControllable
 		{
 			if (currentClosest != null)
 				currentClosest.Dehighlight();
-			closest.Highlight();
+			if (closest != null)
+				closest.Highlight();
+			currentClosest = closest;
 		}
 	}
 }
