@@ -39,6 +39,7 @@ public class InteractionSelector : MonoBehaviour, IControllable
 		if (currentClosest == null)
 			return;
 
+
 		if (currentClosest.PowerType == mobileInput.InputType)
 		{
 			currentClosest.Interact(mobileInput);
