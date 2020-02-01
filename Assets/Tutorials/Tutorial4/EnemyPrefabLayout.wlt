@@ -427,7 +427,7 @@ MonoBehaviour:
   m_LastFolders:
   - Assets/Prefabs
   m_LastFoldersGridSize: -1
-  m_LastProjectPath: D:\Projects\Git\GGJ2020\Project\GGJ2020
+  m_LastProjectPath: C:\Users\tomka\Desktop\TempFiles\GGJ\GGJ2020
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
