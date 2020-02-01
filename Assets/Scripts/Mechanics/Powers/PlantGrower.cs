@@ -93,11 +93,9 @@ public class PlantGrower : Interactable
 
 	public override void Dehighlight()
 	{
-		Debug.Log("asdfadsf");
 	}
 
 	public override void Highlight()
 	{
-		Debug.Log("sdfdsfdsfddfssfd");
 	}
 }
