@@ -20,9 +20,20 @@ public class InteractionSelector : MonoBehaviour, IControllable
 			SetClosest();
 		}
 
-		if (interacting || Input.GetKey(KeyCode.Alpha2))
+		if (Input.GetKeyDown(KeyCode.Alpha2))
+			interacting = true;
+		else if (Input.GetKeyUp(KeyCode.Alpha2))
+			interacting = false;
+
+		if (interacting && currentClosest != null)
 		{
 			currentClosest.Interact(new MobileInput(InputTypes.PlantInteract, Vector3.zero));
+			if (!currentClosest.Active)
+			{
+				inRangeInteractables.Remove(currentClosest);
+				currentClosest = null;
+				SetClosest();
+			}
 		}
 	}
 
@@ -51,7 +62,7 @@ public class InteractionSelector : MonoBehaviour, IControllable
 	{
 		Interactable interactable = collider.GetComponent<Interactable>();
 
-		if (interactable == null)
+		if (interactable == null && interactable.Active)
 			return;
 
 		if (!inRangeInteractables.Contains(interactable))
@@ -91,6 +102,9 @@ public class InteractionSelector : MonoBehaviour, IControllable
 
 		foreach (Interactable current in inRangeInteractables)
 		{
+			if (!current.Active)
+				continue;
+
 			float distance = Vector3.Distance(current.transform.position, transform.position);
 
 			Vector3 delta = current.transform.position - transform.position;
