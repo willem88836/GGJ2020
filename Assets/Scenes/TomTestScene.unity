@@ -358,7 +358,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 2c770ab2ac73b5a4abec3a9d6b016e44, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 475c8e9683d79274a9aa935f7b13a9f5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -483,7 +483,7 @@ TrailRenderer:
       m_Mode: 0
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
-    numCornerVertices: 20
+    numCornerVertices: 0
     numCapVertices: 0
     alignment: 0
     textureMode: 1
@@ -508,7 +508,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1155228207
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -890,6 +890,8 @@ MonoBehaviour:
   Powerbar: {fileID: 1438168925}
   _plants:
   - {fileID: 889889195}
+  _mushrooms: []
+  _vines: []
 --- !u!4 &1825694707
 Transform:
   m_ObjectHideFlags: 0
