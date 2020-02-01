@@ -34,6 +34,7 @@ namespace Platformer.Mechanics
         /*internal new*/ public AudioSource audioSource;
         public Health health;
         public bool controlEnabled = true;
+		bool _climbing;
 
         bool jump;
         Vector2 move;
@@ -60,6 +61,7 @@ namespace Platformer.Mechanics
 			if (inp.InputType == InputTypes.Movement)
 			{
 				InputHorizontalAxis = inp.Value.x;
+				InputVerticalAxis = inp.Value.y;
 			}
 			if (inp.InputType == InputTypes.Jump)
 			{
@@ -89,13 +91,13 @@ namespace Platformer.Mechanics
 			if (!ConnectionActive.Value)
 			{
 				InputHorizontalAxis = Input.GetAxis("Horizontal");
+				InputVerticalAxis = Input.GetAxis("Vertical");
 				InputJumpDown = Input.GetButtonDown("Jump");
 				InputJumpUp = Input.GetButtonUp("Jump");
 			}
 
-            if (controlEnabled)
+			if (controlEnabled)
             {
-
 				move.x = InputHorizontalAxis;
 
                 if (jumpState == JumpState.Grounded && InputJumpDown)
@@ -121,8 +123,16 @@ namespace Platformer.Mechanics
 			}
         }
 
+		public override void FixedUpdate()
+		{
+			if (_climbing)
+				return;
+
+			base.FixedUpdate();
+		}
 
 		private float InputHorizontalAxis;
+		private float InputVerticalAxis;
 		private bool InputJumpDown;
 		private bool InputJumpUp;
 		private bool InputJump;
@@ -161,6 +171,9 @@ namespace Platformer.Mechanics
 
         protected override void ComputeVelocity()
         {
+			if (_climbing)
+				return;
+
             if (jump && IsGrounded)
             {
                 velocity.y = jumpTakeOffSpeed * model.jumpModifier;
@@ -194,5 +207,57 @@ namespace Platformer.Mechanics
             InFlight,
             Landed
         }
-    }
+
+		void OnTriggerEnter2D(Collider2D col)
+		{
+			if (col.tag == "Vine") // sorry 
+			{
+				GrabVine(col);
+
+				// can probably cut some of these, but im afraid to do so
+				controlEnabled = false;
+				velocity = Vector2.zero;
+				gravityModifier = 0;
+				body.gravityScale = 0;
+				_climbing = true;
+			}
+		}
+
+		void GrabVine(Collider2D col)
+		{
+			Vector2 position = transform.position;
+			position.x = col.transform.position.x;
+			transform.position = position;
+		}
+
+		void OnTriggerStay2D(Collider2D col)
+		{
+			if (col.tag != "Vine" && _climbing == false) // sorry 
+				return;
+
+			move.y = InputVerticalAxis;
+
+			transform.Translate(move * Time.deltaTime);
+
+			if (InputJumpDown)
+			{
+				QuitClimbing();
+				velocity.y = jumpTakeOffSpeed * model.jumpModifier;
+			}
+		}
+
+		void OnTriggerExit2D(Collider2D col)
+		{
+			QuitClimbing();
+		}
+
+		void QuitClimbing()
+		{
+			//reset them things
+			_climbing = false;
+			controlEnabled = true;
+			gravityModifier = 1;
+			body.gravityScale = 1;
+		}
+	}
 }
