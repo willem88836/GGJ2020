@@ -414,7 +414,7 @@ TrailRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: d6dadae9d7ed9f9469ad4cd28e31f6ef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -486,7 +486,7 @@ TrailRenderer:
     numCornerVertices: 20
     numCapVertices: 0
     alignment: 0
-    textureMode: 0
+    textureMode: 1
     shadowBias: 0.5
     generateLightingData: 0
   m_MinVertexDistance: 0.1
@@ -839,7 +839,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PowerLeft: 0
-  MaxPower: 7
+  MaxPower: 15
   Powerbar: {fileID: 1438168925}
   _plants:
   - {fileID: 889889195}

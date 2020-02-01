@@ -30,8 +30,6 @@ public class PlantGrower : MonoBehaviour
 
 		if (Vector2.Distance(_currentPosition, _dragPosition) >= _snappingDistance)
 		{
-			Debug.DrawLine(_currentPosition, _dragPosition, Color.red, 2);
-
 			RaycastHit2D[] hit = Physics2D.LinecastAll(_currentPosition, _dragPosition);
 			if (hit.Length > 1)
 				return;
