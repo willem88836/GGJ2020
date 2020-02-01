@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class PlantPower : Power
 {
 	[SerializeField] PlantGrower[] _plants;
+	[SerializeField] Mushroom[] _mushrooms;
 
 	public override void Init()
 	{
@@ -15,6 +16,9 @@ public class PlantPower : Power
 		{
 			plant.OnPowerUsage += UsePower;
 		}
+
+		foreach (Mushroom mushroom in _mushrooms)
+			mushroom.OnPowerUsage += UsePower;
 	}
 
 	public override void NullifyPower()
@@ -25,5 +29,8 @@ public class PlantPower : Power
 		{
 			plant.OnPowerUsage = null;
 		}
+
+		foreach (Mushroom mushroom in _mushrooms)
+			mushroom.OnPowerUsage = null;
 	}
 }
