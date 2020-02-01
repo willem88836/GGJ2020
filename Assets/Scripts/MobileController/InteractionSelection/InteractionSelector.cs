@@ -27,6 +27,7 @@ public class InteractionSelector : MonoBehaviour, IControllable
 
 		if (interacting && currentClosest != null)
 		{
+			gameObject.transform.parent.gameObject.GetComponent<Animator>().Play("Player-Cast");
 			currentClosest.Interact(new MobileInput(InputTypes.PlantInteract, Vector3.zero));
 			if (!currentClosest.Active)
 			{
