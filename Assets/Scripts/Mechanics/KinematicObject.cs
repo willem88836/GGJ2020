@@ -99,7 +99,7 @@ namespace Platformer.Mechanics
 
         }
 
-        protected virtual void FixedUpdate()
+        public virtual void FixedUpdate()
         {
             //if already falling, fall faster than the jump speed, otherwise use normal gravity.
             if (velocity.y < 0)
