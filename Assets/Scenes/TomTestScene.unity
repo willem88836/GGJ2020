@@ -320,7 +320,6 @@ MonoBehaviour:
   _snappingDistance: 0.7
   _treeCollider: {fileID: 4133942658313214692, guid: b6deccba3a49d1e4ea14647274fbd0ed,
     type: 3}
-  _plantPower: {fileID: 1825694706}
 --- !u!212 &889889196
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -839,8 +838,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8b31b5c9ed4cce42a793160efcfd5aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxPower: 13
+  PowerLeft: 0
+  MaxPower: 7
   Powerbar: {fileID: 1438168925}
+  _plants:
+  - {fileID: 889889195}
 --- !u!4 &1825694707
 Transform:
   m_ObjectHideFlags: 0

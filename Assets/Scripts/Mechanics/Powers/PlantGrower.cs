@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,7 +13,7 @@ public class PlantGrower : MonoBehaviour
 	Vector2 _currentPosition;
 	Vector2 _dragPosition;
 
-	[SerializeField] PlantPower _plantPower;
+	public Action<float> OnPowerUsage;
 
 	void Start()
 	{
@@ -22,7 +23,7 @@ public class PlantGrower : MonoBehaviour
 
 	void OnMouseDrag()
 	{
-		if (_plantPower.Powerbar.value <= 0)
+		if (OnPowerUsage == null)
 			return;
 
 		_dragPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -39,7 +40,7 @@ public class PlantGrower : MonoBehaviour
 			AddCollider(NewPosition(), _currentPosition);
 			_currentPosition = transform.position;
 
-			_plantPower.Powerbar.value--;
+			OnPowerUsage.Invoke(1);
 		}
 	}
 
