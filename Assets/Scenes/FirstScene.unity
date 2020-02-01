@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -640,11 +640,33 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mushroom 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2676484396102145071, guid: 7fc5eaba31a52b9479c87d89a158290a,
+        type: 3}
+      propertyPath: Renderer
+      value: 
+      objectReference: {fileID: 226583698}
+    - target: {fileID: 2676484396102145071, guid: 7fc5eaba31a52b9479c87d89a158290a,
+        type: 3}
+      propertyPath: DefaultShader
+      value: 
+      objectReference: {fileID: 10753, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 2676484396102145071, guid: 7fc5eaba31a52b9479c87d89a158290a,
+        type: 3}
+      propertyPath: HightlightShader
+      value: 
+      objectReference: {fileID: -6465566751694194690, guid: 43ec45afc00809948b5529ebc06f35f5,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7fc5eaba31a52b9479c87d89a158290a, type: 3}
 --- !u!4 &226583697 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2676484396102145064, guid: 7fc5eaba31a52b9479c87d89a158290a,
+    type: 3}
+  m_PrefabInstance: {fileID: 226583696}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &226583698 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 2676484397286827885, guid: 7fc5eaba31a52b9479c87d89a158290a,
     type: 3}
   m_PrefabInstance: {fileID: 226583696}
   m_PrefabAsset: {fileID: 0}
@@ -1656,7 +1678,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.3, y: 7.43, z: -9}
+  m_LocalPosition: {x: -2.3631582, y: 7.4300003, z: -9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -42330,7 +42352,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 838423049}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c8534e17a0f90604c9afd4f5c73d829f, type: 3}
   m_Name: 

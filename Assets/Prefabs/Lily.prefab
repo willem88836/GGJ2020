@@ -105,6 +105,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PowerType: PLANTINTERACT
+  Renderer: {fileID: 1582512022359879872}
+  DefaultShader: {fileID: 10753, guid: 0000000000000000f000000000000000, type: 0}
+  HightlightShader: {fileID: -6465566751694194690, guid: 43ec45afc00809948b5529ebc06f35f5,
+    type: 3}
   spriteStates:
   - {fileID: 21300000, guid: af0a63e79d998814196ae62ebc5f8683, type: 3}
   - {fileID: 21300000, guid: 90fa520c049a6c34ca7bd532c273b63a, type: 3}

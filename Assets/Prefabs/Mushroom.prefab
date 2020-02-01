@@ -47,6 +47,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PowerType: PLANTINTERACT
+  Renderer: {fileID: 2676484397286827885}
+  DefaultShader: {fileID: 10753, guid: 0000000000000000f000000000000000, type: 0}
+  HightlightShader: {fileID: -6465566751694194690, guid: 43ec45afc00809948b5529ebc06f35f5,
+    type: 3}
   _newSize: {x: 3, y: 3}
   _growSpeed: 1
   _powerUsage: 1
