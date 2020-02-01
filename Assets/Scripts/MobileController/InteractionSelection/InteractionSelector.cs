@@ -51,6 +51,12 @@ public class InteractionSelector : MonoBehaviour, IControllable
 		if (currentClosest == null)
 			return;
 
+		if (currentClosest.PowerType == InputTypes.PlantDraw && InputTypes.PlantDraw == mobileInput.InputType)
+		{
+			currentClosest.Interact(mobileInput);
+			return;
+		}
+
 		if (currentClosest.PowerType == InputTypes.PlantInteract)
 		{
 			interacting = mobileInput.Value.y < 0;

@@ -3,10 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlantGrower : MonoBehaviour, IControllable
+public class PlantGrower : Interactable
 {
 	[SerializeField] float _snappingDistance = 2;
 	[SerializeField] GameObject _treeCollider;
+	[SerializeField] private int _hitTreshold;
+	[SerializeField] private Transform chunkContainer;
 
 	BoxCollider2D _boxCollider;
 
@@ -25,7 +27,7 @@ public class PlantGrower : MonoBehaviour, IControllable
 		_boxCollider = GetComponent<BoxCollider2D>();
 	}
 
-	public void OnInputAcquired(MobileInput mobileInput)
+	public override void Interact(MobileInput mobileInput)
 	{
 		if (mobileInput.InputType == InputTypes.PlantDraw)
 		{
@@ -56,8 +58,10 @@ public class PlantGrower : MonoBehaviour, IControllable
 			Vector2 worldDragPosition = _currentPosition + dragPosition - _drawerCurrent;
 
 			RaycastHit2D[] hit = Physics2D.LinecastAll(_currentPosition, worldDragPosition);
-			if (hit.Length > 1)
+			if (hit.Length > _hitTreshold)
+			{
 				return;
+			}
 
 			transform.position = NewPosition(worldDragPosition);
 			AddCollider(NewPosition(worldDragPosition), _currentPosition);
@@ -84,6 +88,16 @@ public class PlantGrower : MonoBehaviour, IControllable
 	void AddCollider(Vector2 start, Vector2 end)
 	{
 		Vector2 spawnPosition = (start + end) / 2;
-		Instantiate(_treeCollider, spawnPosition, Quaternion.identity);
+		Instantiate(_treeCollider, spawnPosition, Quaternion.identity, chunkContainer);
+	}
+
+	public override void Dehighlight()
+	{
+		Debug.Log("asdfadsf");
+	}
+
+	public override void Highlight()
+	{
+		Debug.Log("sdfdsfdsfddfssfd");
 	}
 }
