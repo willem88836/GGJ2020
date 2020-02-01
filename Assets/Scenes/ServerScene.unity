@@ -235,6 +235,7 @@ MonoBehaviour:
   ServerIP: {fileID: 11400000, guid: af31e89617277d54fac1e46fb9a29eaa, type: 2}
   controllables:
   - {fileID: 2050404171}
+  isConnected: {fileID: 11400000, guid: b57a76bf61fbf0145bd4576d07389744, type: 2}
 --- !u!4 &898948265
 Transform:
   m_ObjectHideFlags: 0

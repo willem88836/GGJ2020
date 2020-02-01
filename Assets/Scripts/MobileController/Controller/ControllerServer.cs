@@ -25,14 +25,6 @@ public class ControllerServer : MonoBehaviour
 
 	public void Start()
 	{
-		for(int i = controllables.Count - 1; i >= 0; i--)
-		{
-			if (controllables[i].GetType() != typeof(IControllable))
-			{
-				controllables.RemoveAt(i);
-			}
-		}
-
 		listeningThread = new Thread(new ThreadStart(RunServer));
 		listeningThread.Name = "TCPServerThread";
 		listeningThread.Start();
@@ -73,10 +65,14 @@ public class ControllerServer : MonoBehaviour
 				while ((i = stream.Read(data, 0, data.Length)) != 0)
 				{
 					// Translate data bytes to a ASCII string.
-					string json = System.Text.Encoding.ASCII.GetString(data, 0, i);
-					Debug.Log("received: " + json);
-					MobileInput mobileInput = JsonUtility.FromJson<MobileInput>(json);
-					mobileInputQueue.Enqueue(mobileInput);
+					string msg = System.Text.Encoding.ASCII.GetString(data, 0, i);
+					string[] json = msg.Split(new char[] { NetConfiguration.SPLITCHAR }, System.StringSplitOptions.RemoveEmptyEntries);
+					
+					foreach (string j in json)
+					{
+						MobileInput mobileInput = JsonUtility.FromJson<MobileInput>(j);
+						mobileInputQueue.Enqueue(mobileInput);
+					}
 				}
 			}
 
@@ -114,9 +110,9 @@ public class ControllerServer : MonoBehaviour
 			if (!mobileInputQueue.TryDequeue(out mobileInput))
 				break;
 
-			foreach (IControllable controllable in controllables)
+			foreach (MonoBehaviour controllable in controllables)
 			{
-				controllable.OnInputAcquired(mobileInput);
+				(controllable as IControllable).OnInputAcquired(mobileInput);
 			}
 		}
 	}

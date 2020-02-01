@@ -55,33 +55,52 @@ namespace Platformer.Mechanics
             animator = GetComponent<Animator>();
         }
 
-		public void OnInputAcquired(MobileInput mobileInput)
+		public void OnInputAcquired(MobileInput inp)
 		{
-			if (mobileInput.InputType == InputTypes.Movement)
+			if (inp.InputType == InputTypes.Movement)
 			{
-				move.x = mobileInput.Value.x;
+				InputHorizontalAxis = inp.Value.x;
 			}
-			else if (mobileInput.InputType == InputTypes.Jump)
+			if (inp.InputType == InputTypes.Jump)
 			{
-				// The exact same thing as in the update function, but using mobileInput.
-				if (jumpState == JumpState.Grounded && mobileInput.Value.y < 0)
-					jumpState = JumpState.PrepareToJump;
-				else if (mobileInput.Value.y == 0)
+				if (inp.Value.y > 0)
 				{
-					stopJump = true;
-					Schedule<PlayerStopJump>().player = this;
+					if (InputJump && !InputJumpDown)
+					{
+						InputJumpUp = true;
+						InputJumpDown = false;
+					}
+					InputJump = false;
+				}
+				else if (inp.Value.y < 0)
+				{
+					if (!InputJump)
+					{
+						InputJumpDown = true;
+						InputJumpUp = false;
+					}
+					InputJump = true;
 				}
 			}
 		}
 
 		protected override void Update()
         {
-            if (controlEnabled && !ConnectionActive.Value)
+			if (!ConnectionActive.Value)
+			{
+				InputHorizontalAxis = Input.GetAxis("Horizontal");
+				InputJumpDown = Input.GetButtonDown("Jump");
+				InputJumpUp = Input.GetButtonUp("Jump");
+			}
+
+            if (controlEnabled)
             {
-                move.x = Input.GetAxis("Horizontal");
-                if (jumpState == JumpState.Grounded && Input.GetButtonDown("Jump"))
+
+				move.x = InputHorizontalAxis;/// Input.GetAxis("Horizontal");
+				Debug.Log(move.x);
+                if (jumpState == JumpState.Grounded && InputJumpDown/*Input.GetButtonDown("Jump")*/)
                     jumpState = JumpState.PrepareToJump;
-                else if (Input.GetButtonUp("Jump"))
+                else if (InputJumpUp)
                 {
                     stopJump = true;
                     Schedule<PlayerStopJump>().player = this;
@@ -91,9 +110,24 @@ namespace Platformer.Mechanics
             {
                 move.x = 0;
             }
+
             UpdateJumpState();
             base.Update();
+
+			if (ConnectionActive.Value)
+			{
+				InputJumpDown = false;
+				InputJumpUp = false;
+			}
         }
+
+
+		private float InputHorizontalAxis;
+		private bool InputJumpDown;
+		private bool InputJumpUp;
+		private bool InputJump;
+
+
 
         void UpdateJumpState()
         {

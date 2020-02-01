@@ -31,13 +31,20 @@ public class MobileController : MonoBehaviour
 
 	public void SendMobileInput(MobileInput mobileInput)
 	{
-		string json = JsonUtility.ToJson(mobileInput);
-		byte[] data = System.Text.Encoding.ASCII.GetBytes(json);
+		try
+		{
+			string json = JsonUtility.ToJson(mobileInput) + NetConfiguration.SPLITCHAR;
+			byte[] data = System.Text.Encoding.ASCII.GetBytes(json);
 
-		NetworkStream stream = client.GetStream();
-		stream.Write(data, 0, data.Length);
+			NetworkStream stream = client.GetStream();
+			stream.Write(data, 0, data.Length);
 
-		Debug.LogFormat("Sent message ({0}) to server", json);
+			Debug.LogFormat("Sent message ({0}) to server", json);
+		}
+		catch(Exception e)
+		{
+			Debug.LogWarning(e.Message);
+		}
 	}
 
 

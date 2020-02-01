@@ -12,16 +12,16 @@ public class ThumbStick : BaseButton
 		if (!previouslyZero)
 		{
 			clickableThumbStick.position = centre.position;
-			controller.SendMobileInput(new MobileInput(MobileInputType, Vector3.zero));
 			previouslyZero = true;
+			controller.SendMobileInput(new MobileInput(MobileInputType, Vector3.zero));
 		}
 	}
 
 	protected override void HandleInput(Vector3 delta, float distance)
 	{
-		delta.Normalize();
+		delta = delta.normalized * (distance / MaxDistance);
 		clickableThumbStick.position = centre.position + delta * distance;
-		controller.SendMobileInput(new MobileInput(MobileInputType, delta));
 		previouslyZero = false;
+		controller.SendMobileInput(new MobileInput(MobileInputType, delta));
 	}
 }

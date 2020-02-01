@@ -9,13 +9,16 @@ public class Button : BaseButton
 		if (previouslyClicked)
 		{
 			previouslyClicked = false;
-			controller.SendMobileInput(new MobileInput(MobileInputType, Vector3.zero));
+			controller.SendMobileInput(new MobileInput(MobileInputType, Vector3.up));
 		}
 	}
 
 	protected override void HandleInput(Vector3 delta, float distance)
 	{
-		previouslyClicked = true;
-		controller.SendMobileInput(new MobileInput(MobileInputType, Vector3.down));
+		if (!previouslyClicked)
+		{
+			previouslyClicked = true;
+			controller.SendMobileInput(new MobileInput(MobileInputType, Vector3.down));
+		}
 	}
 }
