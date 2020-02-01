@@ -20,12 +20,13 @@ public class InteractionSelector : MonoBehaviour, IControllable
 			SetClosest();
 		}
 
-		if (Input.GetKey(KeyCode.Alpha2))
+		if (interacting || Input.GetKey(KeyCode.Alpha2))
 		{
 			currentClosest.Interact(new MobileInput(InputTypes.PlantInteract, Vector3.zero));
 		}
 	}
 
+	bool interacting = false;
 
 	public void OnInputAcquired(MobileInput mobileInput)
 	{
@@ -39,10 +40,10 @@ public class InteractionSelector : MonoBehaviour, IControllable
 		if (currentClosest == null)
 			return;
 
-
-		if (currentClosest.PowerType == mobileInput.InputType)
+		if (currentClosest.PowerType == InputTypes.PlantInteract)
 		{
-			currentClosest.Interact(mobileInput);
+			interacting = mobileInput.Value.y < 0;
+			Debug.Log("swapping input");
 		}
 	}
 
@@ -117,6 +118,7 @@ public class InteractionSelector : MonoBehaviour, IControllable
 		Interactable closest = LookingUp ? closestTop : closestBottom;
 		if (currentClosest != closest)
 		{
+			interacting = false;
 			if (currentClosest != null)
 				currentClosest.Dehighlight();
 			if (closest != null)
