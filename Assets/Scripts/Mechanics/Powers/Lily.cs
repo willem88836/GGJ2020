@@ -3,21 +3,18 @@ using System.Collections.Generic;
 
 public class Lily : Interactable
 {
-	[SerializeField] List<Sprite> spriteStates;
 	[SerializeField] private Collider2D platform;
 	private int spriteState = 0;
 
 
 	public override void Dehighlight()
 	{
-		Debug.Log("Dehighlighting!!");
-		Renderer.material.shader = DefaultShader;
+		Renderer.sprite = DefaultSprite[spriteState];
 	}
 
 	public override void Highlight()
 	{
-		Debug.Log("Highlighting!!");
-		Renderer.material.shader = HightlightShader;
+		Renderer.sprite = HightlightSprite[spriteState];
 	}
 
 	public override void Interact(MobileInput input)
@@ -29,8 +26,8 @@ public class Lily : Interactable
 			isPressed = true;
 			if (spriteState <= 2)
 			{
-				GetComponent<SpriteRenderer>().sprite = spriteStates[spriteState];
 				spriteState++;
+				Renderer.sprite = HightlightSprite[spriteState];
 				if (spriteState == 2)
 				{
 					Dehighlight();

@@ -177,9 +177,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PowerType: PLANTINTERACT
   Renderer: {fileID: 2127481582805357742}
-  DefaultShader: {fileID: 10753, guid: 0000000000000000f000000000000000, type: 0}
-  HightlightShader: {fileID: -6465566751694194690, guid: 43ec45afc00809948b5529ebc06f35f5,
-    type: 3}
+  DefaultSprite:
+  - {fileID: 21300000, guid: b5f8010ac74c51c468a611b05b0b3beb, type: 3}
+  HightlightSprite:
+  - {fileID: 21300000, guid: e00fee92b37ed3745be585dcce733ade, type: 3}
   _maxLength: 3
   _growSpeed: 1
   _powerUsage: 1
