@@ -25,11 +25,16 @@ public class ControllerServer : MonoBehaviour
 
 	public void Start()
 	{
+		//StartServer();	
+	}
+
+
+	public void StartServer()
+	{
 		listeningThread = new Thread(new ThreadStart(RunServer));
 		listeningThread.Name = "TCPServerThread";
 		listeningThread.Start();
 	}
-
 
 	private void RunServer()
 	{
