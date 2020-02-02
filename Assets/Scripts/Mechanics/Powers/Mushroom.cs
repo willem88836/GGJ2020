@@ -43,13 +43,11 @@ public class Mushroom : Interactable
 
 	public override void Dehighlight()
 	{
-		Debug.Log("Dehighlighting!!");
 		Renderer.material.shader = DefaultShader;
 	}
 
 	public override void Highlight()
 	{
-		Debug.Log("Highlighting!!");
 		Renderer.material.shader = HightlightShader;
 	}
 

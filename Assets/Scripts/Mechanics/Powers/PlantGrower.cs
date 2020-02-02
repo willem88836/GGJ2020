@@ -52,12 +52,17 @@ public class PlantGrower : Interactable
 		// mozart, "Write It", Muse, Doom, The Swanlake 
 		if (Vector2.Distance(_drawerCurrent, dragPosition) >= _snappingDistance)
 		{
-			Vector2 worldDragPosition = _currentPosition + dragPosition - _drawerCurrent;
+			if (insertIndex == 0)
+			{
+				// HACKITYHACKHACK
+				insertIndex++;
+				return; 
+			}
+			Vector2 worldDragPosition = _currentPosition + (dragPosition - _drawerCurrent);
 
 			RaycastHit2D[] hit = Physics2D.LinecastAll(_currentPosition, worldDragPosition);
 			if (hit.Length > _hitTreshold)
 			{
-				Debug.Log("plant is blocked"); 
 				return;
 			}
 
@@ -86,18 +91,20 @@ public class PlantGrower : Interactable
 	void AddCollider(Vector2 start, Vector2 end)
 	{
 		Vector2 spawnPosition = (start + end) / 2;
+		//GameObject a = Instantiate(_treeCollider, chunkContainer, true);
+		//a.transform.position = spawnPosition;
+		//a.transform.rotation = Quaternion.identity;
+
 		Instantiate(_treeCollider, spawnPosition, Quaternion.identity, chunkContainer);
 	}
 
 	public override void Dehighlight()
 	{
-		Debug.Log("Dehighlighting!!");
 		Renderer.material.shader = DefaultShader;
 	}
 
 	public override void Highlight()
 	{
-		Debug.Log("Highlighting!!");
 		Renderer.material.shader = HightlightShader;
 	}
 }
