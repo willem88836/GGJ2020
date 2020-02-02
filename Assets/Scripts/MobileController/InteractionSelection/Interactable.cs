@@ -5,8 +5,8 @@ public abstract class Interactable : MonoBehaviour
 	public string PowerType;
 
 	public SpriteRenderer Renderer;
-	public Shader DefaultShader;
-	public Shader HightlightShader;
+	public Sprite[] DefaultSprite;
+	public Sprite[] HightlightSprite;
 
 	public bool Active { protected set; get; } = true;
 

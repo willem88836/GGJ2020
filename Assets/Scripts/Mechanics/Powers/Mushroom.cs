@@ -43,12 +43,12 @@ public class Mushroom : Interactable
 
 	public override void Dehighlight()
 	{
-		Renderer.material.shader = DefaultShader;
+		Renderer.sprite = DefaultSprite[0];
 	}
 
 	public override void Highlight()
 	{
-		Renderer.material.shader = HightlightShader;
+		Renderer.sprite = HightlightSprite[0];
 	}
 
 	public override void Interact(MobileInput input)

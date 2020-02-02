@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 2c770ab2ac73b5a4abec3a9d6b016e44, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 687687ab1be25644db73c8361b2be968, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -98,9 +98,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PowerType: PLANTDRAW
   Renderer: {fileID: 8647171232976318973}
-  DefaultShader: {fileID: 10753, guid: 0000000000000000f000000000000000, type: 0}
-  HightlightShader: {fileID: -6465566751694194690, guid: 43ec45afc00809948b5529ebc06f35f5,
-    type: 3}
+  DefaultSprite:
+  - {fileID: 21300000, guid: 687687ab1be25644db73c8361b2be968, type: 3}
+  HightlightSprite:
+  - {fileID: 21300000, guid: 3d8fd4bf794a9d3419c6aa70952039cf, type: 3}
   _snappingDistance: 0.7
   _treeCollider: {fileID: 4133942658313214692, guid: b6deccba3a49d1e4ea14647274fbd0ed,
     type: 3}
