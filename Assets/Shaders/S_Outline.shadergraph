@@ -10,7 +10,7 @@
             "typeInfo": {
                 "fullName": "UnityEditor.ShaderGraph.ColorShaderProperty"
             },
-            "JSONnodeData": "{\n    \"m_Name\": \"OutlineColor\",\n    \"m_GeneratePropertyBlock\": true,\n    \"m_Guid\": {\n        \"m_GuidSerialized\": \"3daaa7b0-01a8-4568-ad33-297caea0b701\"\n    },\n    \"m_DefaultReferenceName\": \"Color_96BA608\",\n    \"m_OverrideReferenceName\": \"_OutlineColor\",\n    \"m_Precision\": 0,\n    \"m_Value\": {\n        \"r\": 0.01568627543747425,\n        \"g\": 2.9960784912109377,\n        \"b\": 0.0,\n        \"a\": 1.0\n    },\n    \"m_ColorMode\": 1,\n    \"m_Hidden\": false\n}"
+            "JSONnodeData": "{\n    \"m_Name\": \"OutlineColor\",\n    \"m_GeneratePropertyBlock\": true,\n    \"m_Guid\": {\n        \"m_GuidSerialized\": \"3daaa7b0-01a8-4568-ad33-297caea0b701\"\n    },\n    \"m_DefaultReferenceName\": \"Color_96BA608\",\n    \"m_OverrideReferenceName\": \"_OutlineColor\",\n    \"m_Precision\": 0,\n    \"m_Value\": {\n        \"r\": 1.231372594833374,\n        \"g\": 0.0313725508749485,\n        \"b\": 0.0784313753247261,\n        \"a\": 1.0\n    },\n    \"m_ColorMode\": 1,\n    \"m_Hidden\": false\n}"
         },
         {
             "typeInfo": {

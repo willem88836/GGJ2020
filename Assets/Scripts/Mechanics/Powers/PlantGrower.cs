@@ -18,9 +18,6 @@ public class PlantGrower : Interactable
 
 	public Action<float> OnPowerUsage;
 
-
-
-
 	void Start()
 	{
 		_currentPosition = transform.position;
@@ -60,6 +57,7 @@ public class PlantGrower : Interactable
 			RaycastHit2D[] hit = Physics2D.LinecastAll(_currentPosition, worldDragPosition);
 			if (hit.Length > _hitTreshold)
 			{
+				Debug.Log("plant is blocked"); 
 				return;
 			}
 
@@ -93,9 +91,13 @@ public class PlantGrower : Interactable
 
 	public override void Dehighlight()
 	{
+		Debug.Log("Dehighlighting!!");
+		Renderer.material.shader = DefaultShader;
 	}
 
 	public override void Highlight()
 	{
+		Debug.Log("Highlighting!!");
+		Renderer.material.shader = HightlightShader;
 	}
 }

@@ -33,6 +33,7 @@ public class Lily : Interactable
 				spriteState++;
 				if (spriteState == 2)
 				{
+					Dehighlight();
 					platform.enabled = true;
 					this.Active = false;
 				}

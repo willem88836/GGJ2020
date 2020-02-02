@@ -32,6 +32,7 @@ public class InteractionSelector : MonoBehaviour, IControllable
 			if (!currentClosest.Active)
 			{
 				inRangeInteractables.Remove(currentClosest);
+				currentClosest.Dehighlight();
 				currentClosest = null;
 				SetClosest();
 			}
@@ -142,7 +143,7 @@ public class InteractionSelector : MonoBehaviour, IControllable
 			interacting = false;
 			if (currentClosest != null)
 				currentClosest.Dehighlight();
-			if (closest != null)
+			if (closest != null && closest.Active)
 				closest.Highlight();
 			currentClosest = closest;
 		}
