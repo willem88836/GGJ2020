@@ -20,7 +20,7 @@ public class Lily : Interactable
 	public override void Interact(MobileInput input)
 	{
 		isPressedThisFrame = true;
-		Debug.Log("Interacting!!");
+
 		if (!isPressed)
 		{
 			isPressed = true;
