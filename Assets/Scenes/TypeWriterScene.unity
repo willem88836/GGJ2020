@@ -153,10 +153,10 @@ RectTransform:
   m_Father: {fileID: 1387200266}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -7.8, y: -11.2}
-  m_SizeDelta: {x: 250.5, y: 130.3}
+  m_AnchorMin: {x: 0.6534374, y: 0.03963415}
+  m_AnchorMax: {x: 0.97770154, y: 0.96951216}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1202613236
 MonoBehaviour:
@@ -177,11 +177,11 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_Font: {fileID: 12800000, guid: eff12177659f13947abd8ce5c0021e8d, type: 3}
+    m_FontSize: 28
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 1
     m_MaxSize: 40
     m_Alignment: 0
     m_AlignByGeometry: 0
@@ -210,13 +210,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61f8f2787b3e24146ab344b3c527d36d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _writeSpeed: 20
-  _story: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-    nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-    fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-    culpa qui officia deserunt mollit anim id est laborum.
+  _writeSpeed: 21
+  _story: "\"I remember old teachings, ones from a mind that is not my own. I don't
+    know why I can feel these memories, as they are not my own. As I look at the glistening
+    surface I begin to see the past. How I can reach these thoughts I cannot say,
+    but something speaks to me now. Water too will listen to the call of magic. My
+    fingers remember the patterns of something old, I can feel a familiar thrum in
+    my veins, new yet slumbering in me all along. I see this place as it was many
+    years before, and as I move forward, so do I move back. I know now that this is
+    what I feel compelled to do. I must rediscover what I am in this world, somehow
+    I must regain the memory of many lives past, and in there lies a secret, I know
+    that much now.\"\r"
   _text: {fileID: 1202613236}
 --- !u!1 &1387200262
 GameObject:
@@ -266,12 +270,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96

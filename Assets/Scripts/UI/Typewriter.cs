@@ -12,6 +12,13 @@ public class Typewriter : MonoBehaviour
 
     void Start()
     {
+		StartCoroutine(WaitToType());
+	}
+
+	IEnumerator WaitToType()
+	{
+		yield return new WaitForSeconds(3f);
+
 		StartCoroutine(AddCharacter());
 	}
 
