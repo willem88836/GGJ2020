@@ -101,7 +101,7 @@ MonoBehaviour:
   DefaultSprite:
   - {fileID: 21300000, guid: 687687ab1be25644db73c8361b2be968, type: 3}
   HightlightSprite:
-  - {fileID: 21300000, guid: 687687ab1be25644db73c8361b2be968, type: 3}
+  - {fileID: 21300000, guid: 3d8fd4bf794a9d3419c6aa70952039cf, type: 3}
   _snappingDistance: 0.7
   _treeCollider: {fileID: 4133942658313214692, guid: b6deccba3a49d1e4ea14647274fbd0ed,
     type: 3}

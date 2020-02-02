@@ -44357,7 +44357,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PowerLeft: 7
-  MaxPower: 7
+  MaxPower: 100
   Powerbar: {fileID: 133841304}
   _plants:
   - {fileID: 1175919660}
