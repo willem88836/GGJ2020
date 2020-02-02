@@ -260,5 +260,10 @@ namespace Platformer.Mechanics
 			gravityModifier = 1;
 			body.gravityScale = 1;
 		}
+
+		public void Death(bool isDead)
+		{
+			controlEnabled = !isDead;
+		}
 	}
 }
