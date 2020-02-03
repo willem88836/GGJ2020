@@ -10,7 +10,7 @@ public class PlantGrower : Interactable
 	[SerializeField] private int _hitTreshold;
 	[SerializeField] private Transform chunkContainer;
 
-	BoxCollider2D _boxCollider;
+	BoxCollider _boxCollider;
 
 	Vector2 _currentPosition;
 	Vector2 _drawerCurrent;
@@ -18,10 +18,13 @@ public class PlantGrower : Interactable
 
 	public Action<float> OnPowerUsage;
 
+
+
+
 	void Start()
 	{
 		_currentPosition = transform.position;
-		_boxCollider = GetComponent<BoxCollider2D>();
+		_boxCollider = GetComponent<BoxCollider>();
 	}
 
 	public override void Interact(MobileInput mobileInput)
@@ -32,9 +35,19 @@ public class PlantGrower : Interactable
 		}
 	}
 
-	void OnMouseDrag()
+
+	public void Update()
 	{
-		ProcessPosition(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+		if (Input.GetMouseButton(0))
+		{
+			Vector3 currentMP = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+			float d = Vector2.Distance(currentMP, transform.position);
+			if (d < 4)
+			{
+				ProcessPosition(currentMP);
+			}
+		}
 	}
 
 	private void ProcessPosition(Vector2 dragPosition)
@@ -48,9 +61,9 @@ public class PlantGrower : Interactable
 			insertIndex = 0;
 		}
 
-
+		float d = Vector2.Distance(_drawerCurrent, dragPosition);
 		// mozart, "Write It", Muse, Doom, The Swanlake 
-		if (Vector2.Distance(_drawerCurrent, dragPosition) >= _snappingDistance)
+		if (d >= _snappingDistance)
 		{
 			if (insertIndex == 0)
 			{
@@ -59,7 +72,6 @@ public class PlantGrower : Interactable
 				return; 
 			}
 			Vector2 worldDragPosition = _currentPosition + (dragPosition - _drawerCurrent);
-
 			RaycastHit2D[] hit = Physics2D.LinecastAll(_currentPosition, worldDragPosition);
 			if (hit.Length > _hitTreshold)
 			{

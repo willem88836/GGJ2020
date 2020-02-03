@@ -243,7 +243,6 @@ namespace Platformer.Mechanics
 			if (InputJumpDown)
 			{
 				QuitClimbing();
-				Debug.Log(jumpTakeOffSpeed);
 				velocity.y = jumpTakeOffSpeed * model.jumpModifier;
 			}
 		}
