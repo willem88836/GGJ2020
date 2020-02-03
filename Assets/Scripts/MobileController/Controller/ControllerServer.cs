@@ -41,7 +41,7 @@ public class ControllerServer : MonoBehaviour
 		Debug.Log("Starting TCP Listening Thread...");
 
 		// TODO: test this IP
-		server = new TcpListener(IPAddress.Parse(ServerIP.Value), NetConfiguration.PORT);
+		server = new TcpListener(IPAddress.Any, NetConfiguration.PORT);
 		server.Start();
 		isRunning = true;
 
